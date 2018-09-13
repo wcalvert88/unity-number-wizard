@@ -9,8 +9,11 @@ public class NumberWizard : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        StartGame();
+    }
 
-
+    void StartGame ()
+    {
         Debug.Log("Welcome to the number wizard!");
         Debug.Log("Pick a number, don't tell me what it is!");
         Debug.Log("The highest number you can pick is: " + max + ".");
@@ -25,18 +28,32 @@ public class NumberWizard : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             min = guess;
-            guess = (max + min) / 2;
+            NextGuess();
             Debug.Log("I guessed too low! Is it higher or lower than: " + guess);
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             max = guess;
-            guess = (max + min) / 2;
+            NextGuess();
             Debug.Log("I guessed too high! Is it higher or lower than: " + guess);
         }
         else if (Input.GetKeyDown(KeyCode.Return))
         {
             Debug.Log("I got the number correct!");
+            RestartGame();
         }
+    }
+
+    void NextGuess()
+    {
+        guess = (max + min) / 2;
+    }
+
+    void RestartGame()
+    {
+        max = 1000;
+        min = 1;
+        guess = 500;
+        StartGame();
     }
 }
